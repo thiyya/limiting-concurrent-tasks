@@ -1,17 +1,11 @@
 package main
 
 import (
-	"flag"
-	"md5-response/processor"
+	"limiting-concurrent-tasks/processor"
+	"limiting-concurrent-tasks/utils"
 )
 
 func main() {
-	maxParallelCounter := flag.Int("parallel", 10, "max parallel count")
-	flag.Parse()
-	urls := flag.Args()
-	if *maxParallelCounter > 10 {
-		*maxParallelCounter = 10
-	}
-
-	processor.Processor(urls, *maxParallelCounter)
+	maxParallelCounter, urls := utils.HandleFlag()
+	processor.Processor(urls, maxParallelCounter)
 }
